@@ -95,11 +95,16 @@ export const useARCharacters = (): UseARCharactersResult => {
         }
       });
 
-      // Sort each tier by ID to ensure correct target mapping
+      // Sort each tier by explicit targetIndex if set, otherwise by name
       Object.keys(grouped).forEach((tier) => {
-        grouped[tier as keyof CharactersByTier].sort((a, b) =>
-          a.id.localeCompare(b.id)
-        );
+        grouped[tier as keyof CharactersByTier].sort((a, b) => {
+          if (typeof a.targetIndex === "number" && typeof b.targetIndex === "number") {
+            return a.targetIndex - b.targetIndex;
+          }
+          if (typeof a.targetIndex === "number") return -1;
+          if (typeof b.targetIndex === "number") return 1;
+          return a.name.toLowerCase().localeCompare(b.name.toLowerCase());
+        });
       });
 
       setCharactersByTier(grouped);

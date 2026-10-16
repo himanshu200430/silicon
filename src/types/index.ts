@@ -33,6 +33,7 @@ export interface Character {
   caughtByTeam: string; // Empty string if not caught, team ID if caught
   mindFile: string; // Just filename (e.g., "mewtwo.mind")
   modelUrl?: string; // Optional 3D model path
+  targetIndex?: number | null;
 }
 
 // Helper to calculate tier from value

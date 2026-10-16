@@ -372,9 +372,16 @@ const useARCharacters = ()=>{
                     grouped[tier].push(char);
                 }
             });
-            // Sort each tier by ID to ensure correct target mapping
+            // Sort each tier by explicit targetIndex if set, otherwise by name
             Object.keys(grouped).forEach((tier)=>{
-                grouped[tier].sort((a, b)=>a.id.localeCompare(b.id));
+                grouped[tier].sort((a, b)=>{
+                    if (typeof a.targetIndex === "number" && typeof b.targetIndex === "number") {
+                        return a.targetIndex - b.targetIndex;
+                    }
+                    if (typeof a.targetIndex === "number") return -1;
+                    if (typeof b.targetIndex === "number") return 1;
+                    return a.name.toLowerCase().localeCompare(b.name.toLowerCase());
+                });
             });
             setCharactersByTier(grouped);
         } catch (err) {
@@ -396,7 +403,7 @@ const useARCharacters = ()=>{
         refetch: fetchCharacters
     };
 };
-_s(useARCharacters, "VTgCqAfSopv7brCMkiHyq97Gqa8=");
+_s(useARCharacters, "LccDcGM5uR4C+6nNUxxeI/xAYlU=");
 if (typeof globalThis.$RefreshHelpers$ === 'object' && globalThis.$RefreshHelpers !== null) {
     __turbopack_context__.k.registerExports(__turbopack_context__.m, globalThis.$RefreshHelpers$);
 }
@@ -924,40 +931,21 @@ const DetectedCharacterOverlay = (param)=>{
     _s();
     const tier = character.tier || (0, __TURBOPACK__imported__module__$5b$project$5d2f$src$2f$components$2f$ar$2d$camera$2f$types$2e$ts__$5b$app$2d$client$5d$__$28$ecmascript$29$__["getTierFromValue"])(character.value);
     const themeColor = (0, __TURBOPACK__imported__module__$5b$project$5d2f$src$2f$components$2f$ar$2d$camera$2f$utils$2f$tierStyles$2e$ts__$5b$app$2d$client$5d$__$28$ecmascript$29$__["getTierThemeColor"])(tier);
-    const isLegendary = tier === "Legendary";
-    const [isExpanded, setIsExpanded] = (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$compiled$2f$react$2f$index$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["useState"])(!isLegendary);
     const [isMinimized, setIsMinimized] = (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$compiled$2f$react$2f$index$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["useState"])(false);
-    // Auto-expand legendary cards after 5 seconds
-    (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$compiled$2f$react$2f$index$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["useEffect"])({
-        "DetectedCharacterOverlay.useEffect": ()=>{
-            if (isLegendary) {
-                const timer = setTimeout({
-                    "DetectedCharacterOverlay.useEffect.timer": ()=>{
-                        setIsExpanded(true);
-                    }
-                }["DetectedCharacterOverlay.useEffect.timer"], 5000);
-                return ({
-                    "DetectedCharacterOverlay.useEffect": ()=>clearTimeout(timer)
-                })["DetectedCharacterOverlay.useEffect"];
-            }
-        }
-    }["DetectedCharacterOverlay.useEffect"], [
-        isLegendary
-    ]);
     const imageSrc = (0, __TURBOPACK__imported__module__$5b$project$5d2f$src$2f$utils$2f$imageUtils$2e$ts__$5b$app$2d$client$5d$__$28$ecmascript$29$__["getImageSrc"])(character.image);
     const displayAsText = (0, __TURBOPACK__imported__module__$5b$project$5d2f$src$2f$utils$2f$imageUtils$2e$ts__$5b$app$2d$client$5d$__$28$ecmascript$29$__["shouldDisplayAsText"])(character.image);
     const hasContent = imageSrc || displayAsText;
     const toggleMinimize = ()=>{
         setIsMinimized(!isMinimized);
     };
-    // Compact view for legendary characters (first 5 seconds) OR when manually minimized
-    if (isLegendary && !isExpanded || isMinimized) {
+    // Compact view only when manually minimized by the user
+    if (isMinimized) {
         return /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$compiled$2f$react$2f$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["jsxDEV"])("div", {
             className: "absolute inset-0 flex items-center justify-center p-4 z-40",
             children: /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$compiled$2f$react$2f$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["jsxDEV"])("div", {
-                className: "relative bg-slate-900/60 backdrop-blur-md border-2 border-".concat(themeColor.primary, "/70 rounded-2xl px-8 py-4 shadow-2xl shadow-").concat(themeColor.glow, " animate-scaleIn transition-all duration-500"),
+                className: "relative bg-slate-900/60 backdrop-blur-md border-2 border-".concat(themeColor.primary, "/70 rounded-2xl px-8 py-4 shadow-2xl shadow-").concat(themeColor.glow, " animate-scaleIn transition-all duration-300"),
                 children: [
-                    isMinimized && /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$compiled$2f$react$2f$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["jsxDEV"])("button", {
+                    /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$compiled$2f$react$2f$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["jsxDEV"])("button", {
                         onClick: toggleMinimize,
                         className: "absolute -top-3 -right-3 w-8 h-8 bg-slate-800 hover:bg-slate-700 text-white rounded-full flex items-center justify-center border-2 border-slate-600 transition-all duration-200 z-10",
                         "aria-label": "Expand",
@@ -972,18 +960,18 @@ const DetectedCharacterOverlay = (param)=>{
                                 clipRule: "evenodd"
                             }, void 0, false, {
                                 fileName: "[project]/src/components/ar-camera/ui/DetectedCharacterOverlay.tsx",
-                                lineNumber: 70,
+                                lineNumber: 56,
                                 columnNumber: 17
                             }, ("TURBOPACK compile-time value", void 0))
                         }, void 0, false, {
                             fileName: "[project]/src/components/ar-camera/ui/DetectedCharacterOverlay.tsx",
-                            lineNumber: 64,
+                            lineNumber: 50,
                             columnNumber: 15
                         }, ("TURBOPACK compile-time value", void 0))
                     }, void 0, false, {
                         fileName: "[project]/src/components/ar-camera/ui/DetectedCharacterOverlay.tsx",
-                        lineNumber: 59,
-                        columnNumber: 13
+                        lineNumber: 45,
+                        columnNumber: 11
                     }, ("TURBOPACK compile-time value", void 0)),
                     /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$compiled$2f$react$2f$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["jsxDEV"])("button", {
                         onClick: onCollect,
@@ -992,18 +980,18 @@ const DetectedCharacterOverlay = (param)=>{
                         children: isCaught ? "Already Caught" : cooldownSeconds && cooldownSeconds > 0 ? "Cooldown: ".concat((0, __TURBOPACK__imported__module__$5b$project$5d2f$src$2f$utils$2f$quizCooldown$2e$ts__$5b$app$2d$client$5d$__$28$ecmascript$29$__["formatCooldownTime"])(cooldownSeconds)) : "Collect Character"
                     }, void 0, false, {
                         fileName: "[project]/src/components/ar-camera/ui/DetectedCharacterOverlay.tsx",
-                        lineNumber: 79,
+                        lineNumber: 64,
                         columnNumber: 11
                     }, ("TURBOPACK compile-time value", void 0))
                 ]
             }, void 0, true, {
                 fileName: "[project]/src/components/ar-camera/ui/DetectedCharacterOverlay.tsx",
-                lineNumber: 54,
+                lineNumber: 41,
                 columnNumber: 9
             }, ("TURBOPACK compile-time value", void 0))
         }, void 0, false, {
             fileName: "[project]/src/components/ar-camera/ui/DetectedCharacterOverlay.tsx",
-            lineNumber: 53,
+            lineNumber: 40,
             columnNumber: 7
         }, ("TURBOPACK compile-time value", void 0));
     }
@@ -1011,7 +999,7 @@ const DetectedCharacterOverlay = (param)=>{
     return /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$compiled$2f$react$2f$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["jsxDEV"])("div", {
         className: "absolute inset-0 flex items-center justify-center p-4 z-40",
         children: /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$compiled$2f$react$2f$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["jsxDEV"])("div", {
-            className: "relative bg-slate-900/30 backdrop-blur-md border-2 border-".concat(themeColor.primary, "/70 rounded-2xl p-6 max-w-sm w-full shadow-2xl shadow-").concat(themeColor.glow, " ").concat(isLegendary ? "animate-expandIn" : "animate-scaleIn"),
+            className: "relative bg-slate-900/30 backdrop-blur-md border-2 border-".concat(themeColor.primary, "/70 rounded-2xl p-6 max-w-sm w-full shadow-2xl shadow-").concat(themeColor.glow, " animate-scaleIn"),
             children: [
                 /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$compiled$2f$react$2f$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["jsxDEV"])("button", {
                     onClick: toggleMinimize,
@@ -1028,17 +1016,17 @@ const DetectedCharacterOverlay = (param)=>{
                             clipRule: "evenodd"
                         }, void 0, false, {
                             fileName: "[project]/src/components/ar-camera/ui/DetectedCharacterOverlay.tsx",
-                            lineNumber: 123,
+                            lineNumber: 108,
                             columnNumber: 13
                         }, ("TURBOPACK compile-time value", void 0))
                     }, void 0, false, {
                         fileName: "[project]/src/components/ar-camera/ui/DetectedCharacterOverlay.tsx",
-                        lineNumber: 117,
+                        lineNumber: 102,
                         columnNumber: 11
                     }, ("TURBOPACK compile-time value", void 0))
                 }, void 0, false, {
                     fileName: "[project]/src/components/ar-camera/ui/DetectedCharacterOverlay.tsx",
-                    lineNumber: 112,
+                    lineNumber: 97,
                     columnNumber: 9
                 }, ("TURBOPACK compile-time value", void 0)),
                 /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$compiled$2f$react$2f$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["jsxDEV"])("span", {
@@ -1046,7 +1034,7 @@ const DetectedCharacterOverlay = (param)=>{
                     children: tier
                 }, void 0, false, {
                     fileName: "[project]/src/components/ar-camera/ui/DetectedCharacterOverlay.tsx",
-                    lineNumber: 130,
+                    lineNumber: 115,
                     columnNumber: 9
                 }, ("TURBOPACK compile-time value", void 0)),
                 /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$compiled$2f$react$2f$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["jsxDEV"])("div", {
@@ -1071,7 +1059,7 @@ const DetectedCharacterOverlay = (param)=>{
                                     }
                                 }, void 0, false, {
                                     fileName: "[project]/src/components/ar-camera/ui/DetectedCharacterOverlay.tsx",
-                                    lineNumber: 144,
+                                    lineNumber: 129,
                                     columnNumber: 17
                                 }, ("TURBOPACK compile-time value", void 0)) : null,
                                 displayAsText && /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$compiled$2f$react$2f$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["jsxDEV"])("span", {
@@ -1080,13 +1068,13 @@ const DetectedCharacterOverlay = (param)=>{
                                     children: (_character_image = character.image) === null || _character_image === void 0 ? void 0 : _character_image.trim()
                                 }, void 0, false, {
                                     fileName: "[project]/src/components/ar-camera/ui/DetectedCharacterOverlay.tsx",
-                                    lineNumber: 163,
+                                    lineNumber: 148,
                                     columnNumber: 17
                                 }, ("TURBOPACK compile-time value", void 0))
                             ]
                         }, void 0, true, {
                             fileName: "[project]/src/components/ar-camera/ui/DetectedCharacterOverlay.tsx",
-                            lineNumber: 139,
+                            lineNumber: 124,
                             columnNumber: 13
                         }, ("TURBOPACK compile-time value", void 0)) : /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$compiled$2f$react$2f$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["jsxDEV"])("div", {
                             className: "relative w-48 h-64 rounded-2xl border-2 border-dashed border-".concat(themeColor.primary, "/40 bg-slate-800/60 flex items-center justify-center text-").concat(themeColor.primary, " text-sm text-center px-6"),
@@ -1097,13 +1085,13 @@ const DetectedCharacterOverlay = (param)=>{
                                     children: tier
                                 }, void 0, false, {
                                     fileName: "[project]/src/components/ar-camera/ui/DetectedCharacterOverlay.tsx",
-                                    lineNumber: 178,
+                                    lineNumber: 163,
                                     columnNumber: 15
                                 }, ("TURBOPACK compile-time value", void 0))
                             ]
                         }, void 0, true, {
                             fileName: "[project]/src/components/ar-camera/ui/DetectedCharacterOverlay.tsx",
-                            lineNumber: 174,
+                            lineNumber: 159,
                             columnNumber: 13
                         }, ("TURBOPACK compile-time value", void 0)),
                         /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$compiled$2f$react$2f$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["jsxDEV"])("div", {
@@ -1114,7 +1102,7 @@ const DetectedCharacterOverlay = (param)=>{
                                     children: character.name
                                 }, void 0, false, {
                                     fileName: "[project]/src/components/ar-camera/ui/DetectedCharacterOverlay.tsx",
-                                    lineNumber: 189,
+                                    lineNumber: 174,
                                     columnNumber: 13
                                 }, ("TURBOPACK compile-time value", void 0)),
                                 /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$compiled$2f$react$2f$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["jsxDEV"])("p", {
@@ -1122,7 +1110,7 @@ const DetectedCharacterOverlay = (param)=>{
                                     children: isCaught ? "Already caught!" : cooldownSeconds && cooldownSeconds > 0 ? "On cooldown" : "Character detected!"
                                 }, void 0, false, {
                                     fileName: "[project]/src/components/ar-camera/ui/DetectedCharacterOverlay.tsx",
-                                    lineNumber: 194,
+                                    lineNumber: 179,
                                     columnNumber: 13
                                 }, ("TURBOPACK compile-time value", void 0)),
                                 isCaught && character.caughtByTeam && /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$compiled$2f$react$2f$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["jsxDEV"])("p", {
@@ -1133,7 +1121,7 @@ const DetectedCharacterOverlay = (param)=>{
                                     ]
                                 }, void 0, true, {
                                     fileName: "[project]/src/components/ar-camera/ui/DetectedCharacterOverlay.tsx",
-                                    lineNumber: 202,
+                                    lineNumber: 187,
                                     columnNumber: 15
                                 }, ("TURBOPACK compile-time value", void 0)),
                                 !isCaught && cooldownSeconds && cooldownSeconds > 0 && /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$compiled$2f$react$2f$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["jsxDEV"])("p", {
@@ -1144,19 +1132,19 @@ const DetectedCharacterOverlay = (param)=>{
                                     ]
                                 }, void 0, true, {
                                     fileName: "[project]/src/components/ar-camera/ui/DetectedCharacterOverlay.tsx",
-                                    lineNumber: 207,
+                                    lineNumber: 192,
                                     columnNumber: 15
                                 }, ("TURBOPACK compile-time value", void 0))
                             ]
                         }, void 0, true, {
                             fileName: "[project]/src/components/ar-camera/ui/DetectedCharacterOverlay.tsx",
-                            lineNumber: 188,
+                            lineNumber: 173,
                             columnNumber: 11
                         }, ("TURBOPACK compile-time value", void 0))
                     ]
                 }, void 0, true, {
                     fileName: "[project]/src/components/ar-camera/ui/DetectedCharacterOverlay.tsx",
-                    lineNumber: 137,
+                    lineNumber: 122,
                     columnNumber: 9
                 }, ("TURBOPACK compile-time value", void 0)),
                 /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$compiled$2f$react$2f$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["jsxDEV"])("button", {
@@ -1166,22 +1154,22 @@ const DetectedCharacterOverlay = (param)=>{
                     children: isCaught ? "Already Caught" : cooldownSeconds && cooldownSeconds > 0 ? "Cooldown: ".concat((0, __TURBOPACK__imported__module__$5b$project$5d2f$src$2f$utils$2f$quizCooldown$2e$ts__$5b$app$2d$client$5d$__$28$ecmascript$29$__["formatCooldownTime"])(cooldownSeconds)) : "Collect Character"
                 }, void 0, false, {
                     fileName: "[project]/src/components/ar-camera/ui/DetectedCharacterOverlay.tsx",
-                    lineNumber: 214,
+                    lineNumber: 199,
                     columnNumber: 9
                 }, ("TURBOPACK compile-time value", void 0))
             ]
         }, void 0, true, {
             fileName: "[project]/src/components/ar-camera/ui/DetectedCharacterOverlay.tsx",
-            lineNumber: 104,
+            lineNumber: 89,
             columnNumber: 7
         }, ("TURBOPACK compile-time value", void 0))
     }, void 0, false, {
         fileName: "[project]/src/components/ar-camera/ui/DetectedCharacterOverlay.tsx",
-        lineNumber: 103,
+        lineNumber: 88,
         columnNumber: 5
     }, ("TURBOPACK compile-time value", void 0));
 };
-_s(DetectedCharacterOverlay, "lwB7J/AhbP/oFiZFTZ8lVaaK5yU=");
+_s(DetectedCharacterOverlay, "WDDr9N9svgr925HyZsa4WaF1zrg=");
 _c = DetectedCharacterOverlay;
 var _c;
 __turbopack_context__.k.register(_c, "DetectedCharacterOverlay");
@@ -1541,18 +1529,22 @@ const MindARScene = (param)=>{
     }), /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$compiled$2f$react$2f$index$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["createElement"])("a-entity", {
         light: "type: directional; intensity: 0.8",
         position: "0 1 0"
-    }), // Render a target entity for each character in the selected tier
-    characters.length > 0 && characters.map((character, index)=>/*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$compiled$2f$react$2f$index$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["createElement"])("a-entity", {
+    }), // Render a target entity for each character in the selected tier.
+    // Uses explicit character.targetIndex if configured, otherwise falls back to array index.
+    characters.length > 0 && characters.map((character, index)=>{
+        const targetIndex = typeof character.targetIndex === "number" ? character.targetIndex : index;
+        return /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$compiled$2f$react$2f$index$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["createElement"])("a-entity", {
             key: character.id,
-            ref: registerTargetRef(character.id, index),
-            "mindar-image-target": "targetIndex: ".concat(index)
+            ref: registerTargetRef(character.id, targetIndex),
+            "mindar-image-target": "targetIndex: ".concat(targetIndex)
         }, character.modelUrl && /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$compiled$2f$react$2f$index$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["createElement"])("a-gltf-model", {
             src: "#character-model-".concat(character.id),
             position: "0 0 0",
             rotation: "60 0 0",
             scale: "1 1 1",
             "animation-mixer": "clip: pm0149_00_00_20001_battlewait01_loop; loop: repeat"
-        }))));
+        }));
+    }));
 };
 _s(MindARScene, "/MRGA4WzghehxAkNXr8P+A3NCuA=");
 _c = MindARScene;
@@ -2327,7 +2319,7 @@ function ARCamera(param) {
         columnNumber: 5
     }, this);
 }
-_s(ARCamera, "do8jUHNEA8G4McM0oxrOrcrfs2Y=", false, function() {
+_s(ARCamera, "oZ58EjL5plP1cW3fAVuwkpyxDus=", false, function() {
     return [
         __TURBOPACK__imported__module__$5b$project$5d2f$src$2f$components$2f$ar$2d$camera$2f$hooks$2f$useARCharacters$2e$ts__$5b$app$2d$client$5d$__$28$ecmascript$29$__["useARCharacters"],
         __TURBOPACK__imported__module__$5b$project$5d2f$src$2f$components$2f$ar$2d$camera$2f$hooks$2f$useMindARScripts$2e$ts__$5b$app$2d$client$5d$__$28$ecmascript$29$__["useMindARScripts"],
@@ -3057,13 +3049,13 @@ function Home() {
     return /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$compiled$2f$react$2f$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["jsxDEV"])(__TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$compiled$2f$react$2f$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["Fragment"], {
         children: [
             /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$compiled$2f$react$2f$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["jsxDEV"])(__TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$styled$2d$jsx$2f$style$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["default"], {
-                id: "8dad1984c7bdc56b",
+                id: "634cdbb4d18bbc02",
                 children: "@keyframes fadeIn{0%{opacity:0;transform:translateY(20px)}to{opacity:1;transform:translateY(0)}}.animate-fadeIn{animation:.6s ease-out fadeIn}.scrollbar-thin::-webkit-scrollbar{width:6px}.scrollbar-thin::-webkit-scrollbar-track{background:rgba(30,30,46,.3);border-radius:3px}.scrollbar-thin::-webkit-scrollbar-thumb{background:rgba(139,92,246,.5);border-radius:3px}.scrollbar-thin::-webkit-scrollbar-thumb:hover{background:rgba(139,92,246,.7)}.scrollbar-hide::-webkit-scrollbar{display:none}.scrollbar-hide{-ms-overflow-style:none;scrollbar-width:none}"
             }, void 0, false, void 0, this),
             /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$compiled$2f$react$2f$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["jsxDEV"])("div", {
-                className: "jsx-8dad1984c7bdc56b" + " " + "min-h-screen bg-gradient-to-b from-slate-950 via-purple-950/20 to-slate-950 flex items-center justify-center p-4",
+                className: "jsx-634cdbb4d18bbc02" + " " + "min-h-screen bg-gradient-to-b from-slate-950 via-purple-950/20 to-slate-950 flex items-center justify-center p-4",
                 children: /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$compiled$2f$react$2f$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["jsxDEV"])("div", {
-                    className: "jsx-8dad1984c7bdc56b" + " " + "w-full max-w-md flex flex-col gap-6 animate-fadeIn",
+                    className: "jsx-634cdbb4d18bbc02" + " " + "w-full max-w-md flex flex-col gap-6 animate-fadeIn",
                     children: [
                         /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$compiled$2f$react$2f$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["jsxDEV"])(__TURBOPACK__imported__module__$5b$project$5d2f$src$2f$components$2f$Header$2e$tsx__$5b$app$2d$client$5d$__$28$ecmascript$29$__["default"], {}, void 0, false, {
                             fileName: "[project]/src/app/page.tsx",
@@ -3071,13 +3063,13 @@ function Home() {
                             columnNumber: 11
                         }, this),
                         /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$compiled$2f$react$2f$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["jsxDEV"])("main", {
-                            className: "jsx-8dad1984c7bdc56b" + " " + "bg-gradient-to-br from-slate-900/90 to-slate-800/90 backdrop-blur-sm border border-purple-500/20 rounded-3xl p-6 shadow-2xl shadow-purple-500/20",
+                            className: "jsx-634cdbb4d18bbc02" + " " + "bg-gradient-to-br from-slate-900/90 to-slate-800/90 backdrop-blur-sm border border-purple-500/20 rounded-3xl p-6 shadow-2xl shadow-purple-500/20",
                             children: [
                                 /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$compiled$2f$react$2f$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["jsxDEV"])("div", {
-                                    className: "jsx-8dad1984c7bdc56b" + " " + "flex items-center justify-between mb-6",
+                                    className: "jsx-634cdbb4d18bbc02" + " " + "flex items-center justify-between mb-6",
                                     children: [
                                         /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$compiled$2f$react$2f$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["jsxDEV"])("h1", {
-                                            className: "jsx-8dad1984c7bdc56b" + " " + "flex-1 ".concat(selectedTeam ? "text-left" : "text-center", " text-2xl font-bold text-transparent bg-clip-text bg-gradient-to-r from-purple-400 to-pink-400 tracking-tight"),
+                                            className: "jsx-634cdbb4d18bbc02" + " " + "flex-1 ".concat(selectedTeam ? "text-left" : "text-center", " text-2xl font-bold text-transparent bg-clip-text bg-gradient-to-r from-purple-400 to-pink-400 tracking-tight"),
                                             children: selectedTeam ? "Hunt is On!!" : "Let's start hunting"
                                         }, void 0, false, {
                                             fileName: "[project]/src/app/page.tsx",
@@ -3087,7 +3079,7 @@ function Home() {
                                         selectedTeam && /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$compiled$2f$react$2f$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["jsxDEV"])("button", {
                                             type: "button",
                                             onClick: handleChangeTeam,
-                                            className: "jsx-8dad1984c7bdc56b" + " " + "ml-4 whitespace-nowrap rounded-lg bg-slate-800/70 border border-purple-500/40 px-4 py-2 text-sm font-medium text-purple-200 hover:border-purple-400 hover:text-purple-100 transition-colors",
+                                            className: "jsx-634cdbb4d18bbc02" + " " + "ml-4 whitespace-nowrap rounded-lg bg-slate-800/70 border border-purple-500/40 px-4 py-2 text-sm font-medium text-purple-200 hover:border-purple-400 hover:text-purple-100 transition-colors",
                                             children: "Change Team"
                                         }, void 0, false, {
                                             fileName: "[project]/src/app/page.tsx",
@@ -3110,10 +3102,10 @@ function Home() {
                                 }, this),
                                 /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$compiled$2f$react$2f$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["jsxDEV"])("div", {
                                     onClick: ()=>setShowUncaughtModal(true),
-                                    className: "jsx-8dad1984c7bdc56b" + " " + "bg-gradient-to-r from-slate-800/50 to-slate-700/50 border border-purple-500/30 rounded-xl p-3 mb-6 text-center cursor-pointer hover:border-purple-500/50 hover:scale-[1.02] transition-all duration-300 group",
+                                    className: "jsx-634cdbb4d18bbc02" + " " + "bg-gradient-to-r from-slate-800/50 to-slate-700/50 border border-purple-500/30 rounded-xl p-3 mb-6 text-center cursor-pointer hover:border-purple-500/50 hover:scale-[1.02] transition-all duration-300 group",
                                     children: [
                                         /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$compiled$2f$react$2f$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["jsxDEV"])("p", {
-                                            className: "jsx-8dad1984c7bdc56b" + " " + "text-purple-300 text-sm font-medium group-hover:text-purple-200 transition-colors",
+                                            className: "jsx-634cdbb4d18bbc02" + " " + "text-purple-300 text-sm font-medium group-hover:text-purple-200 transition-colors",
                                             children: "Show character left to hunt"
                                         }, void 0, false, {
                                             fileName: "[project]/src/app/page.tsx",
@@ -3121,7 +3113,7 @@ function Home() {
                                             columnNumber: 15
                                         }, this),
                                         /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$compiled$2f$react$2f$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["jsxDEV"])("p", {
-                                            className: "jsx-8dad1984c7bdc56b" + " " + "text-3xl font-bold text-transparent bg-clip-text bg-gradient-to-r from-amber-400 to-orange-400 mt-1 group-hover:scale-105 transition-transform",
+                                            className: "jsx-634cdbb4d18bbc02" + " " + "text-3xl font-bold text-transparent bg-clip-text bg-gradient-to-r from-amber-400 to-orange-400 mt-1 group-hover:scale-105 transition-transform",
                                             children: isLoadingUncaughtCount ? "..." : typeof uncaughtCount === "number" ? uncaughtCount : "--"
                                         }, void 0, false, {
                                             fileName: "[project]/src/app/page.tsx",
@@ -3135,10 +3127,10 @@ function Home() {
                                     columnNumber: 13
                                 }, this),
                                 !selectedTeam && /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$compiled$2f$react$2f$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["jsxDEV"])("div", {
-                                    className: "jsx-8dad1984c7bdc56b" + " " + "mb-6",
+                                    className: "jsx-634cdbb4d18bbc02" + " " + "mb-6",
                                     children: [
                                         /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$compiled$2f$react$2f$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["jsxDEV"])("h2", {
-                                            className: "jsx-8dad1984c7bdc56b" + " " + "text-purple-300 text-center font-semibold mb-4 tracking-wide",
+                                            className: "jsx-634cdbb4d18bbc02" + " " + "text-purple-300 text-center font-semibold mb-4 tracking-wide",
                                             children: "Select Your Team"
                                         }, void 0, false, {
                                             fileName: "[project]/src/app/page.tsx",
@@ -3146,19 +3138,19 @@ function Home() {
                                             columnNumber: 17
                                         }, this),
                                         /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$compiled$2f$react$2f$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["jsxDEV"])("div", {
-                                            className: "jsx-8dad1984c7bdc56b" + " " + "bg-gradient-to-br from-slate-800/50 to-slate-700/50 border border-purple-500/30 rounded-2xl p-4",
+                                            className: "jsx-634cdbb4d18bbc02" + " " + "bg-gradient-to-br from-slate-800/50 to-slate-700/50 border border-purple-500/30 rounded-2xl p-4",
                                             children: [
                                                 /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$compiled$2f$react$2f$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["jsxDEV"])("div", {
-                                                    className: "jsx-8dad1984c7bdc56b" + " " + "mb-4",
+                                                    className: "jsx-634cdbb4d18bbc02" + " " + "mb-4",
                                                     children: /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$compiled$2f$react$2f$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["jsxDEV"])("div", {
-                                                        className: "jsx-8dad1984c7bdc56b" + " " + "relative",
+                                                        className: "jsx-634cdbb4d18bbc02" + " " + "relative",
                                                         children: [
                                                             /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$compiled$2f$react$2f$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["jsxDEV"])("input", {
                                                                 type: "text",
                                                                 value: teamSearchQuery,
                                                                 onChange: (e)=>setTeamSearchQuery(e.target.value),
                                                                 placeholder: "Search teams...",
-                                                                className: "jsx-8dad1984c7bdc56b" + " " + "w-full px-4 py-2.5 pl-10 bg-slate-800/70 border border-purple-500/40 rounded-xl text-purple-100 placeholder-purple-300/50 focus:outline-none focus:border-purple-400 focus:ring-2 focus:ring-purple-500/20 transition-all"
+                                                                className: "jsx-634cdbb4d18bbc02" + " " + "w-full px-4 py-2.5 pl-10 bg-slate-800/70 border border-purple-500/40 rounded-xl text-purple-100 placeholder-purple-300/50 focus:outline-none focus:border-purple-400 focus:ring-2 focus:ring-purple-500/20 transition-all"
                                                             }, void 0, false, {
                                                                 fileName: "[project]/src/app/page.tsx",
                                                                 lineNumber: 261,
@@ -3168,13 +3160,13 @@ function Home() {
                                                                 fill: "none",
                                                                 stroke: "currentColor",
                                                                 viewBox: "0 0 24 24",
-                                                                className: "jsx-8dad1984c7bdc56b" + " " + "absolute left-3 top-1/2 -translate-y-1/2 w-4 h-4 text-purple-300/50",
+                                                                className: "jsx-634cdbb4d18bbc02" + " " + "absolute left-3 top-1/2 -translate-y-1/2 w-4 h-4 text-purple-300/50",
                                                                 children: /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$compiled$2f$react$2f$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["jsxDEV"])("path", {
                                                                     strokeLinecap: "round",
                                                                     strokeLinejoin: "round",
                                                                     strokeWidth: 2,
                                                                     d: "M21 21l-6-6m2-5a7 7 0 11-14 0 7 7 0 0114 0z",
-                                                                    className: "jsx-8dad1984c7bdc56b"
+                                                                    className: "jsx-634cdbb4d18bbc02"
                                                                 }, void 0, false, {
                                                                     fileName: "[project]/src/app/page.tsx",
                                                                     lineNumber: 274,
@@ -3187,18 +3179,18 @@ function Home() {
                                                             }, this),
                                                             teamSearchQuery && /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$compiled$2f$react$2f$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["jsxDEV"])("button", {
                                                                 onClick: ()=>setTeamSearchQuery(""),
-                                                                className: "jsx-8dad1984c7bdc56b" + " " + "absolute right-3 top-1/2 -translate-y-1/2 text-purple-300/50 hover:text-purple-300 transition-colors",
+                                                                className: "jsx-634cdbb4d18bbc02" + " " + "absolute right-3 top-1/2 -translate-y-1/2 text-purple-300/50 hover:text-purple-300 transition-colors",
                                                                 children: /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$compiled$2f$react$2f$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["jsxDEV"])("svg", {
                                                                     fill: "none",
                                                                     stroke: "currentColor",
                                                                     viewBox: "0 0 24 24",
-                                                                    className: "jsx-8dad1984c7bdc56b" + " " + "w-4 h-4",
+                                                                    className: "jsx-634cdbb4d18bbc02" + " " + "w-4 h-4",
                                                                     children: /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$compiled$2f$react$2f$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["jsxDEV"])("path", {
                                                                         strokeLinecap: "round",
                                                                         strokeLinejoin: "round",
                                                                         strokeWidth: 2,
                                                                         d: "M6 18L18 6M6 6l12 12",
-                                                                        className: "jsx-8dad1984c7bdc56b"
+                                                                        className: "jsx-634cdbb4d18bbc02"
                                                                     }, void 0, false, {
                                                                         fileName: "[project]/src/app/page.tsx",
                                                                         lineNumber: 292,
@@ -3226,11 +3218,11 @@ function Home() {
                                                     columnNumber: 19
                                                 }, this),
                                                 /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$compiled$2f$react$2f$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["jsxDEV"])("div", {
-                                                    className: "jsx-8dad1984c7bdc56b" + " " + "space-y-2 max-h-64 overflow-y-auto pr-2 scrollbar-thin",
+                                                    className: "jsx-634cdbb4d18bbc02" + " " + "space-y-2 max-h-64 overflow-y-auto pr-2 scrollbar-thin",
                                                     children: filteredTeams.length === 0 ? /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$compiled$2f$react$2f$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["jsxDEV"])("div", {
-                                                        className: "jsx-8dad1984c7bdc56b" + " " + "text-center py-6",
+                                                        className: "jsx-634cdbb4d18bbc02" + " " + "text-center py-6",
                                                         children: /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$compiled$2f$react$2f$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["jsxDEV"])("p", {
-                                                            className: "jsx-8dad1984c7bdc56b" + " " + "text-purple-300 text-sm",
+                                                            className: "jsx-634cdbb4d18bbc02" + " " + "text-purple-300 text-sm",
                                                             children: [
                                                                 'No teams found matching "',
                                                                 teamSearchQuery,
@@ -3247,9 +3239,9 @@ function Home() {
                                                         columnNumber: 23
                                                     }, this) : filteredTeams.map((team)=>/*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$compiled$2f$react$2f$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["jsxDEV"])("div", {
                                                             onClick: ()=>handleTeamSelect(team.id),
-                                                            className: "jsx-8dad1984c7bdc56b" + " " + "h-12 rounded-xl border-2 border-slate-700 bg-slate-800/30 hover:border-purple-500/50 hover:bg-slate-700/30 transition-all duration-300 cursor-pointer flex items-center px-4 group",
+                                                            className: "jsx-634cdbb4d18bbc02" + " " + "h-12 rounded-xl border-2 border-slate-700 bg-slate-800/30 hover:border-purple-500/50 hover:bg-slate-700/30 transition-all duration-300 cursor-pointer flex items-center px-4 group",
                                                             children: /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$compiled$2f$react$2f$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["jsxDEV"])("span", {
-                                                                className: "jsx-8dad1984c7bdc56b" + " " + "text-slate-300 text-sm font-medium group-hover:text-purple-300 transition-colors",
+                                                                className: "jsx-634cdbb4d18bbc02" + " " + "text-slate-300 text-sm font-medium group-hover:text-purple-300 transition-colors",
                                                                 children: team.teamName
                                                             }, void 0, false, {
                                                                 fileName: "[project]/src/app/page.tsx",
@@ -3279,10 +3271,10 @@ function Home() {
                                     columnNumber: 15
                                 }, this),
                                 selectedTeam && /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$compiled$2f$react$2f$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["jsxDEV"])("div", {
-                                    className: "jsx-8dad1984c7bdc56b" + " " + "mb-6",
+                                    className: "jsx-634cdbb4d18bbc02" + " " + "mb-6",
                                     children: [
                                         /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$compiled$2f$react$2f$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["jsxDEV"])("h2", {
-                                            className: "jsx-8dad1984c7bdc56b" + " " + "text-purple-300 text-center font-semibold mb-3 tracking-wide text-sm",
+                                            className: "jsx-634cdbb4d18bbc02" + " " + "text-purple-300 text-center font-semibold mb-3 tracking-wide text-sm",
                                             children: [
                                                 "Characters Caught by ",
                                                 selectedTeam.teamName
@@ -3293,21 +3285,21 @@ function Home() {
                                             columnNumber: 17
                                         }, this),
                                         /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$compiled$2f$react$2f$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["jsxDEV"])("div", {
-                                            className: "jsx-8dad1984c7bdc56b" + " " + "bg-gradient-to-br from-slate-800/50 to-slate-700/50 border border-purple-500/30 rounded-2xl p-4",
+                                            className: "jsx-634cdbb4d18bbc02" + " " + "bg-gradient-to-br from-slate-800/50 to-slate-700/50 border border-purple-500/30 rounded-2xl p-4",
                                             children: isLoadingCaught ? /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$compiled$2f$react$2f$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["jsxDEV"])("div", {
-                                                className: "jsx-8dad1984c7bdc56b" + " " + "flex items-center justify-center py-6",
+                                                className: "jsx-634cdbb4d18bbc02" + " " + "flex items-center justify-center py-6",
                                                 children: /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$compiled$2f$react$2f$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["jsxDEV"])("div", {
-                                                    className: "jsx-8dad1984c7bdc56b" + " " + "text-center",
+                                                    className: "jsx-634cdbb4d18bbc02" + " " + "text-center",
                                                     children: [
                                                         /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$compiled$2f$react$2f$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["jsxDEV"])("div", {
-                                                            className: "jsx-8dad1984c7bdc56b" + " " + "w-12 h-12 border-4 border-purple-500 border-t-transparent rounded-full animate-spin mx-auto mb-3"
+                                                            className: "jsx-634cdbb4d18bbc02" + " " + "w-12 h-12 border-4 border-purple-500 border-t-transparent rounded-full animate-spin mx-auto mb-3"
                                                         }, void 0, false, {
                                                             fileName: "[project]/src/app/page.tsx",
                                                             lineNumber: 340,
                                                             columnNumber: 25
                                                         }, this),
                                                         /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$compiled$2f$react$2f$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["jsxDEV"])("p", {
-                                                            className: "jsx-8dad1984c7bdc56b" + " " + "text-purple-300 text-sm",
+                                                            className: "jsx-634cdbb4d18bbc02" + " " + "text-purple-300 text-sm",
                                                             children: "Loading caught characters..."
                                                         }, void 0, false, {
                                                             fileName: "[project]/src/app/page.tsx",
@@ -3325,10 +3317,10 @@ function Home() {
                                                 lineNumber: 338,
                                                 columnNumber: 21
                                             }, this) : charactersCaught.length === 0 ? /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$compiled$2f$react$2f$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["jsxDEV"])("div", {
-                                                className: "jsx-8dad1984c7bdc56b" + " " + "text-center py-6",
+                                                className: "jsx-634cdbb4d18bbc02" + " " + "text-center py-6",
                                                 children: [
                                                     /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$compiled$2f$react$2f$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["jsxDEV"])("p", {
-                                                        className: "jsx-8dad1984c7bdc56b" + " " + "text-purple-300 text-sm font-medium",
+                                                        className: "jsx-634cdbb4d18bbc02" + " " + "text-purple-300 text-sm font-medium",
                                                         children: "No characters caught yet."
                                                     }, void 0, false, {
                                                         fileName: "[project]/src/app/page.tsx",
@@ -3336,7 +3328,7 @@ function Home() {
                                                         columnNumber: 23
                                                     }, this),
                                                     /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$compiled$2f$react$2f$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["jsxDEV"])("p", {
-                                                        className: "jsx-8dad1984c7bdc56b" + " " + "text-slate-400 text-xs mt-1",
+                                                        className: "jsx-634cdbb4d18bbc02" + " " + "text-slate-400 text-xs mt-1",
                                                         children: "Start hunting to collect your first character!"
                                                     }, void 0, false, {
                                                         fileName: "[project]/src/app/page.tsx",
@@ -3349,25 +3341,25 @@ function Home() {
                                                 lineNumber: 347,
                                                 columnNumber: 21
                                             }, this) : /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$compiled$2f$react$2f$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["jsxDEV"])("div", {
-                                                className: "jsx-8dad1984c7bdc56b" + " " + "flex items-center gap-3 overflow-x-auto pb-2",
+                                                className: "jsx-634cdbb4d18bbc02" + " " + "flex items-center gap-3 overflow-x-auto pb-2",
                                                 children: [
                                                     /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$compiled$2f$react$2f$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["jsxDEV"])("button", {
                                                         onClick: ()=>{
                                                             const container = document.getElementById("characters-container");
                                                             if (container) container.scrollLeft -= 120;
                                                         },
-                                                        className: "jsx-8dad1984c7bdc56b" + " " + "flex-shrink-0 w-8 h-16 flex items-center justify-center text-purple-400 hover:text-purple-300 transition-colors",
+                                                        className: "jsx-634cdbb4d18bbc02" + " " + "flex-shrink-0 w-8 h-16 flex items-center justify-center text-purple-400 hover:text-purple-300 transition-colors",
                                                         children: /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$compiled$2f$react$2f$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["jsxDEV"])("svg", {
                                                             fill: "none",
                                                             stroke: "currentColor",
                                                             viewBox: "0 0 24 24",
-                                                            className: "jsx-8dad1984c7bdc56b" + " " + "w-5 h-5",
+                                                            className: "jsx-634cdbb4d18bbc02" + " " + "w-5 h-5",
                                                             children: /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$compiled$2f$react$2f$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["jsxDEV"])("path", {
                                                                 strokeLinecap: "round",
                                                                 strokeLinejoin: "round",
                                                                 strokeWidth: 2,
                                                                 d: "M15 19l-7-7 7-7",
-                                                                className: "jsx-8dad1984c7bdc56b"
+                                                                className: "jsx-634cdbb4d18bbc02"
                                                             }, void 0, false, {
                                                                 fileName: "[project]/src/app/page.tsx",
                                                                 lineNumber: 372,
@@ -3385,16 +3377,16 @@ function Home() {
                                                     }, this),
                                                     /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$compiled$2f$react$2f$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["jsxDEV"])("div", {
                                                         id: "characters-container",
-                                                        className: "jsx-8dad1984c7bdc56b" + " " + "flex gap-3 overflow-x-auto flex-1 scrollbar-hide scroll-smooth",
+                                                        className: "jsx-634cdbb4d18bbc02" + " " + "flex gap-3 overflow-x-auto flex-1 scrollbar-hide scroll-smooth",
                                                         children: charactersCaught.map((character)=>{
                                                             var _character_image;
                                                             const imageSrc = (0, __TURBOPACK__imported__module__$5b$project$5d2f$src$2f$utils$2f$imageUtils$2e$ts__$5b$app$2d$client$5d$__$28$ecmascript$29$__["getImageSrc"])(character.image);
                                                             const displayAsText = (0, __TURBOPACK__imported__module__$5b$project$5d2f$src$2f$utils$2f$imageUtils$2e$ts__$5b$app$2d$client$5d$__$28$ecmascript$29$__["shouldDisplayAsText"])(character.image);
                                                             return /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$compiled$2f$react$2f$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["jsxDEV"])("div", {
-                                                                className: "jsx-8dad1984c7bdc56b" + " " + "flex-shrink-0 w-24 bg-gradient-to-br from-slate-700/50 to-slate-800/50 border-2 border-purple-500/40 rounded-xl flex flex-col hover:border-purple-400 transition-all duration-300 hover:scale-105 cursor-pointer",
+                                                                className: "jsx-634cdbb4d18bbc02" + " " + "flex-shrink-0 w-24 bg-gradient-to-br from-slate-700/50 to-slate-800/50 border-2 border-purple-500/40 rounded-xl flex flex-col hover:border-purple-400 transition-all duration-300 hover:scale-105 cursor-pointer",
                                                                 children: [
                                                                     /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$compiled$2f$react$2f$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["jsxDEV"])("div", {
-                                                                        className: "jsx-8dad1984c7bdc56b" + " " + "h-20 w-full overflow-hidden rounded-t-xl",
+                                                                        className: "jsx-634cdbb4d18bbc02" + " " + "h-20 w-full overflow-hidden rounded-t-xl",
                                                                         children: imageSrc ? // eslint-disable-next-line @next/next/no-img-element
                                                                         /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$compiled$2f$react$2f$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["jsxDEV"])("img", {
                                                                             src: imageSrc,
@@ -3403,22 +3395,22 @@ function Home() {
                                                                             onError: (e)=>{
                                                                                 e.currentTarget.style.display = "none";
                                                                             },
-                                                                            className: "jsx-8dad1984c7bdc56b" + " " + "w-full h-full object-cover"
+                                                                            className: "jsx-634cdbb4d18bbc02" + " " + "w-full h-full object-cover"
                                                                         }, void 0, false, {
                                                                             fileName: "[project]/src/app/page.tsx",
                                                                             lineNumber: 400,
                                                                             columnNumber: 35
                                                                         }, this) : /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$compiled$2f$react$2f$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["jsxDEV"])("div", {
-                                                                            className: "jsx-8dad1984c7bdc56b" + " " + "w-full h-full flex items-center justify-center",
+                                                                            className: "jsx-634cdbb4d18bbc02" + " " + "w-full h-full flex items-center justify-center",
                                                                             children: displayAsText ? /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$compiled$2f$react$2f$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["jsxDEV"])("div", {
-                                                                                className: "jsx-8dad1984c7bdc56b" + " " + "text-3xl",
+                                                                                className: "jsx-634cdbb4d18bbc02" + " " + "text-3xl",
                                                                                 children: (_character_image = character.image) === null || _character_image === void 0 ? void 0 : _character_image.trim()
                                                                             }, void 0, false, {
                                                                                 fileName: "[project]/src/app/page.tsx",
                                                                                 lineNumber: 412,
                                                                                 columnNumber: 39
                                                                             }, this) : /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$compiled$2f$react$2f$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["jsxDEV"])("div", {
-                                                                                className: "jsx-8dad1984c7bdc56b" + " " + "text-3xl",
+                                                                                className: "jsx-634cdbb4d18bbc02" + " " + "text-3xl",
                                                                                 children: "❓"
                                                                             }, void 0, false, {
                                                                                 fileName: "[project]/src/app/page.tsx",
@@ -3436,9 +3428,9 @@ function Home() {
                                                                         columnNumber: 31
                                                                     }, this),
                                                                     /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$compiled$2f$react$2f$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["jsxDEV"])("div", {
-                                                                        className: "jsx-8dad1984c7bdc56b" + " " + "h-8 flex items-center justify-center px-2 py-1 bg-slate-900/50 rounded-b-xl border-t border-purple-500/20",
+                                                                        className: "jsx-634cdbb4d18bbc02" + " " + "h-8 flex items-center justify-center px-2 py-1 bg-slate-900/50 rounded-b-xl border-t border-purple-500/20",
                                                                         children: /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$compiled$2f$react$2f$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["jsxDEV"])("div", {
-                                                                            className: "jsx-8dad1984c7bdc56b" + " " + "text-xs text-purple-200 font-medium text-center line-clamp-2 w-full",
+                                                                            className: "jsx-634cdbb4d18bbc02" + " " + "text-xs text-purple-200 font-medium text-center line-clamp-2 w-full",
                                                                             children: character.name
                                                                         }, void 0, false, {
                                                                             fileName: "[project]/src/app/page.tsx",
@@ -3467,18 +3459,18 @@ function Home() {
                                                             const container = document.getElementById("characters-container");
                                                             if (container) container.scrollLeft += 120;
                                                         },
-                                                        className: "jsx-8dad1984c7bdc56b" + " " + "flex-shrink-0 w-8 h-16 flex items-center justify-center text-purple-400 hover:text-purple-300 transition-colors",
+                                                        className: "jsx-634cdbb4d18bbc02" + " " + "flex-shrink-0 w-8 h-16 flex items-center justify-center text-purple-400 hover:text-purple-300 transition-colors",
                                                         children: /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$compiled$2f$react$2f$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["jsxDEV"])("svg", {
                                                             fill: "none",
                                                             stroke: "currentColor",
                                                             viewBox: "0 0 24 24",
-                                                            className: "jsx-8dad1984c7bdc56b" + " " + "w-5 h-5",
+                                                            className: "jsx-634cdbb4d18bbc02" + " " + "w-5 h-5",
                                                             children: /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$compiled$2f$react$2f$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["jsxDEV"])("path", {
                                                                 strokeLinecap: "round",
                                                                 strokeLinejoin: "round",
                                                                 strokeWidth: 2,
                                                                 d: "M9 5l7 7-7 7",
-                                                                className: "jsx-8dad1984c7bdc56b"
+                                                                className: "jsx-634cdbb4d18bbc02"
                                                             }, void 0, false, {
                                                                 fileName: "[project]/src/app/page.tsx",
                                                                 lineNumber: 447,

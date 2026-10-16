@@ -23,21 +23,8 @@ export const DetectedCharacterOverlay = ({
 }: DetectedCharacterOverlayProps) => {
   const tier = character.tier || getTierFromValue(character.value);
   const themeColor = getTierThemeColor(tier);
-  const isLegendary = tier === "Legendary";
 
-  const [isExpanded, setIsExpanded] = useState(!isLegendary);
   const [isMinimized, setIsMinimized] = useState(false);
-
-  // Auto-expand legendary cards after 5 seconds
-  useEffect(() => {
-    if (isLegendary) {
-      const timer = setTimeout(() => {
-        setIsExpanded(true);
-      }, 5000);
-
-      return () => clearTimeout(timer);
-    }
-  }, [isLegendary]);
 
   const imageSrc = getImageSrc(character.image);
   const displayAsText = shouldDisplayAsText(character.image);
@@ -47,17 +34,16 @@ export const DetectedCharacterOverlay = ({
     setIsMinimized(!isMinimized);
   };
 
-  // Compact view for legendary characters (first 5 seconds) OR when manually minimized
-  if ((isLegendary && !isExpanded) || isMinimized) {
+  // Compact view only when manually minimized by the user
+  if (isMinimized) {
     return (
       <div className="absolute inset-0 flex items-center justify-center p-4 z-40">
         <div
-          className={`relative bg-slate-900/60 backdrop-blur-md border-2 border-${themeColor.primary}/70 rounded-2xl px-8 py-4 shadow-2xl shadow-${themeColor.glow} animate-scaleIn transition-all duration-500`}
+          className={`relative bg-slate-900/60 backdrop-blur-md border-2 border-${themeColor.primary}/70 rounded-2xl px-8 py-4 shadow-2xl shadow-${themeColor.glow} animate-scaleIn transition-all duration-300`}
         >
-          {/* Expand button - only show if manually minimized */}
-          {isMinimized && (
-            <button
-              onClick={toggleMinimize}
+          {/* Expand button - show when manually minimized */}
+          <button
+            onClick={toggleMinimize}
               className="absolute -top-3 -right-3 w-8 h-8 bg-slate-800 hover:bg-slate-700 text-white rounded-full flex items-center justify-center border-2 border-slate-600 transition-all duration-200 z-10"
               aria-label="Expand"
             >
@@ -74,7 +60,6 @@ export const DetectedCharacterOverlay = ({
                 />
               </svg>
             </button>
-          )}
 
           <button
             onClick={onCollect}
@@ -106,7 +91,7 @@ export const DetectedCharacterOverlay = ({
           themeColor.primary
         }/70 rounded-2xl p-6 max-w-sm w-full shadow-2xl shadow-${
           themeColor.glow
-        } ${isLegendary ? "animate-expandIn" : "animate-scaleIn"}`}
+        } animate-scaleIn`}
       >
         {/* Minimize button */}
         <button

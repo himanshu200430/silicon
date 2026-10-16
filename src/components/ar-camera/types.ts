@@ -12,6 +12,7 @@ export interface Character {
   isCaught: boolean;
   caughtByTeam: string;
   modelUrl?: string;
+  targetIndex?: number | null;
 }
 
 // Helper to calculate tier from value

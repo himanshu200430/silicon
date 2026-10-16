@@ -1,5 +1,7 @@
 {
+  "/api/admin/setup/route": "app/api/admin/setup/route.js",
   "/api/cards/[id]/catch/route": "app/api/cards/[id]/catch/route.js",
+  "/api/cards/[id]/route": "app/api/cards/[id]/route.js",
   "/api/cards/route": "app/api/cards/route.js",
   "/api/teams/route": "app/api/teams/route.js",
   "/favicon.ico/route": "app/favicon.ico/route.js",

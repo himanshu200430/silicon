@@ -13,6 +13,7 @@ interface CardFormProps {
     image: string;
     mindFile: string;
     modelUrl: string;
+    targetIndex?: number | null;
     isCaught?: boolean;
     caughtByTeam?: string;
   };
@@ -32,6 +33,7 @@ export default function CardForm({
     mindFile: "",
     modelUrl: "",
     value: 50,
+    targetIndex: "",
   });
   const [isSubmitting, setIsSubmitting] = useState(false);
   const [error, setError] = useState("");
@@ -50,6 +52,10 @@ export default function CardForm({
           "value" in cardToEdit && typeof cardToEdit.value === "number"
             ? cardToEdit.value
             : 50,
+        targetIndex:
+          cardToEdit.targetIndex !== undefined && cardToEdit.targetIndex !== null
+            ? String(cardToEdit.targetIndex)
+            : "",
       });
     } else {
       setFormData({
@@ -61,6 +67,7 @@ export default function CardForm({
         mindFile: "",
         modelUrl: "",
         value: 50,
+        targetIndex: "",
       });
     }
     setError("");
@@ -116,13 +123,17 @@ export default function CardForm({
         await updateCard(cardToEdit.id, {
           ...formData,
           options: formData.options.map((opt) => opt.trim()),
-        });
+          targetIndex:
+            formData.targetIndex !== "" ? Number(formData.targetIndex) : null,
+        } as unknown as Parameters<typeof updateCard>[1]);
       } else {
         // Create new card (API automatically generates sequential ID and assigns tier)
         await createCard({
           ...formData,
           options: formData.options.map((opt) => opt.trim()),
-        });
+          targetIndex:
+            formData.targetIndex !== "" ? Number(formData.targetIndex) : null,
+        } as unknown as Parameters<typeof createCard>[0]);
       }
 
       onClose();
@@ -294,6 +305,27 @@ export default function CardForm({
                 placeholder="Enter model URL"
                 disabled={isSubmitting}
               />
+            </div>
+            <div>
+              <label className="block text-sm font-medium text-gray-300 mb-1">
+                AR Target Index (0-based in .mind file)
+              </label>
+              <input
+                type="number"
+                min="0"
+                value={formData.targetIndex}
+                onChange={(e) =>
+                  setFormData({ ...formData, targetIndex: e.target.value })
+                }
+                className="w-full px-3 py-2 bg-gray-700 border border-gray-600 rounded-md
+                       text-white placeholder-gray-400 focus:outline-none focus:ring-2
+                       focus:ring-blue-500 focus:border-transparent"
+                placeholder="e.g. 0, 1, 2 (matches image order in .mind file)"
+                disabled={isSubmitting}
+              />
+              <span className="text-xs text-gray-400 mt-1 block">
+                The numeric index of this card in the compiled .mind file (Target 0, Target 1, Target 2...)
+              </span>
             </div>
           </div>
 

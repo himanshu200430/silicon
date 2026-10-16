@@ -494,7 +494,7 @@ const LoginForm = ({ username, password, error, onUsernameChange, onPasswordChan
                         type: "text",
                         value: username,
                         onChange: (e)=>onUsernameChange(e.target.value),
-                        className: "w-full px-3 py-2 bg-gray-800 border border-gray-700 rounded-md focus:outline-none focus:ring-2 focus:ring-indigo-500 focus:border-indigo-500 text-white placeholder-gray-400",
+                        className: "w-full px-3 py-2 bg-gray-800 border border-gray-700 rounded-md   focus:outline-none focus:ring-2 focus:ring-indigo-500 focus:border-indigo-500   text-white placeholder-gray-400",
                         placeholder: "Enter username",
                         required: true
                     }, void 0, false, {
@@ -524,7 +524,7 @@ const LoginForm = ({ username, password, error, onUsernameChange, onPasswordChan
                         type: "password",
                         value: password,
                         onChange: (e)=>onPasswordChange(e.target.value),
-                        className: "w-full px-3 py-2 bg-gray-800 border border-gray-700 rounded-md focus:outline-none focus:ring-2 focus:ring-indigo-500 focus:border-indigo-500 text-white placeholder-gray-400",
+                        className: "w-full px-3 py-2 bg-gray-800 border border-gray-700 rounded-md   focus:outline-none focus:ring-2 focus:ring-indigo-500 focus:border-indigo-500   text-white placeholder-gray-400",
                         placeholder: "Enter password",
                         required: true
                     }, void 0, false, {
@@ -555,7 +555,7 @@ const LoginForm = ({ username, password, error, onUsernameChange, onPasswordChan
             }, ("TURBOPACK compile-time value", void 0)),
             /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$server$2f$route$2d$modules$2f$app$2d$page$2f$vendored$2f$ssr$2f$react$2d$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$ssr$5d$__$28$ecmascript$29$__["jsxDEV"])("button", {
                 type: "submit",
-                className: "w-full bg-gradient-to-r from-indigo-600 to-purple-600 hover:from-indigo-700 hover:to-purple-700 text-white font-semibold px-6 py-3 rounded-md transition-colors focus:outline-none focus:ring-2 focus:ring-indigo-500 focus:ring-offset-2 focus:ring-offset-gray-900 shadow-lg shadow-indigo-500/20",
+                className: "w-full bg-gradient-to-r from-indigo-600 to-purple-600   hover:from-indigo-700 hover:to-purple-700 text-white font-semibold   px-6 py-3 rounded-md transition-colors focus:outline-none focus:ring-2   focus:ring-indigo-500 focus:ring-offset-2 focus:ring-offset-gray-900   shadow-lg shadow-indigo-500/20",
                 children: "Login"
             }, void 0, false, {
                 fileName: "[project]/src/components/admin/LoginForm.tsx",
@@ -601,7 +601,7 @@ const SetupScreen = ({ isInitializing, error, onInitialize })=>{
             }, ("TURBOPACK compile-time value", void 0)),
             /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$server$2f$route$2d$modules$2f$app$2d$page$2f$vendored$2f$ssr$2f$react$2d$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$ssr$5d$__$28$ecmascript$29$__["jsxDEV"])("button", {
                 onClick: onInitialize,
-                className: "px-6 py-2 bg-indigo-600 text-white rounded-md hover:bg-indigo-700  transition-colors focus:outline-none focus:ring-2 focus:ring-indigo-500  focus:ring-offset-2 focus:ring-offset-gray-800 disabled:opacity-50",
+                className: "px-6 py-2 bg-indigo-600 text-white rounded-md hover:bg-indigo-700    transition-colors focus:outline-none focus:ring-2 focus:ring-indigo-500    focus:ring-offset-2 focus:ring-offset-gray-800 disabled:opacity-50",
                 disabled: isInitializing,
                 children: isInitializing ? "Initializing..." : "Initialize Admin Portal"
             }, void 0, false, {
@@ -671,7 +671,7 @@ const ActionButtons = ({ currentView, onViewChange, onResetClick, onUndoClick, l
             lastSnapshot && /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$server$2f$route$2d$modules$2f$app$2d$page$2f$vendored$2f$ssr$2f$react$2d$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$ssr$5d$__$28$ecmascript$29$__["jsxDEV"])("button", {
                 onClick: onUndoClick,
                 disabled: isLoading,
-                className: "px-4 py-2 bg-yellow-600 hover:bg-yellow-700 text-white rounded-md  transition-colors shadow-lg shadow-yellow-500/20 disabled:opacity-50 flex items-center gap-2",
+                className: "px-4 py-2 bg-yellow-600 hover:bg-yellow-700 text-white rounded-md    transition-colors shadow-lg shadow-yellow-500/20 disabled:opacity-50   flex items-center gap-2",
                 title: `Undo last reset (expires in ${getRemainingMinutes()} min)`,
                 children: [
                     /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$server$2f$route$2d$modules$2f$app$2d$page$2f$vendored$2f$ssr$2f$react$2d$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$ssr$5d$__$28$ecmascript$29$__["jsxDEV"])("svg", {
@@ -702,7 +702,7 @@ const ActionButtons = ({ currentView, onViewChange, onResetClick, onUndoClick, l
             }, ("TURBOPACK compile-time value", void 0)),
             /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$server$2f$route$2d$modules$2f$app$2d$page$2f$vendored$2f$ssr$2f$react$2d$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$ssr$5d$__$28$ecmascript$29$__["jsxDEV"])("button", {
                 onClick: onResetClick,
-                className: "px-4 py-2 bg-red-600 hover:bg-red-700 text-white rounded-md  transition-colors shadow-lg shadow-red-500/20 flex items-center gap-2",
+                className: "px-4 py-2 bg-red-600 hover:bg-red-700 text-white rounded-md    transition-colors shadow-lg shadow-red-500/20 flex items-center gap-2",
                 children: [
                     /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$server$2f$route$2d$modules$2f$app$2d$page$2f$vendored$2f$ssr$2f$react$2d$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$ssr$5d$__$28$ecmascript$29$__["jsxDEV"])("svg", {
                         xmlns: "http://www.w3.org/2000/svg",
@@ -763,7 +763,7 @@ const TeamsManagement = ({ teams, isLoading, deleteConfirm, onAddTeam, onEditTea
                     }, ("TURBOPACK compile-time value", void 0)),
                     /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$server$2f$route$2d$modules$2f$app$2d$page$2f$vendored$2f$ssr$2f$react$2d$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$ssr$5d$__$28$ecmascript$29$__["jsxDEV"])("button", {
                         onClick: onAddTeam,
-                        className: "bg-indigo-600 hover:bg-indigo-700 text-white px-4 py-2 rounded-md  transition-colors shadow-lg shadow-indigo-500/20",
+                        className: "bg-indigo-600 hover:bg-indigo-700 text-white px-4 py-2 rounded-md    transition-colors shadow-lg shadow-indigo-500/20",
                         children: "Add New Team"
                     }, void 0, false, {
                         fileName: "[project]/src/components/admin/TeamsManagement.tsx",
@@ -816,7 +816,7 @@ const TeamsManagement = ({ teams, isLoading, deleteConfirm, onAddTeam, onEditTea
             }, ("TURBOPACK compile-time value", void 0)) : /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$server$2f$route$2d$modules$2f$app$2d$page$2f$vendored$2f$ssr$2f$react$2d$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$ssr$5d$__$28$ecmascript$29$__["jsxDEV"])("div", {
                 className: "grid gap-3",
                 children: teams.map((team)=>/*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$server$2f$route$2d$modules$2f$app$2d$page$2f$vendored$2f$ssr$2f$react$2d$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$ssr$5d$__$28$ecmascript$29$__["jsxDEV"])("div", {
-                        className: "bg-gray-800 rounded-lg p-4 flex justify-between items-center hover:bg-gray-750 transition-colors border border-gray-700",
+                        className: "bg-gray-800 rounded-lg p-4 flex justify-between items-center   hover:bg-gray-750 transition-colors border border-gray-700",
                         children: [
                             /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$server$2f$route$2d$modules$2f$app$2d$page$2f$vendored$2f$ssr$2f$react$2d$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$ssr$5d$__$28$ecmascript$29$__["jsxDEV"])("div", {
                                 children: [
@@ -850,7 +850,7 @@ const TeamsManagement = ({ teams, isLoading, deleteConfirm, onAddTeam, onEditTea
                                 children: [
                                     /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$server$2f$route$2d$modules$2f$app$2d$page$2f$vendored$2f$ssr$2f$react$2d$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$ssr$5d$__$28$ecmascript$29$__["jsxDEV"])("button", {
                                         onClick: ()=>onEditTeam(team),
-                                        className: "px-3 py-1 bg-blue-600 hover:bg-blue-700 text-white rounded transition-colors text-sm",
+                                        className: "px-3 py-1 bg-blue-600 hover:bg-blue-700 text-white rounded   transition-colors text-sm",
                                         children: "Edit"
                                     }, void 0, false, {
                                         fileName: "[project]/src/components/admin/TeamsManagement.tsx",
@@ -948,7 +948,7 @@ const CardsManagement = ({ cards, isLoading, deleteConfirm, onAddCard, onEditCar
                     }, ("TURBOPACK compile-time value", void 0)),
                     /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$server$2f$route$2d$modules$2f$app$2d$page$2f$vendored$2f$ssr$2f$react$2d$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$ssr$5d$__$28$ecmascript$29$__["jsxDEV"])("button", {
                         onClick: onAddCard,
-                        className: "bg-indigo-600 hover:bg-indigo-700 text-white px-4 py-2 rounded-md  transition-colors shadow-lg shadow-indigo-500/20",
+                        className: "bg-indigo-600 hover:bg-indigo-700 text-white px-4 py-2 rounded-md    transition-colors shadow-lg shadow-indigo-500/20",
                         children: "Add New Card"
                     }, void 0, false, {
                         fileName: "[project]/src/components/admin/CardsManagement.tsx",
@@ -1210,7 +1210,7 @@ const CardsManagement = ({ cards, isLoading, deleteConfirm, onAddCard, onEditCar
                                                 children: [
                                                     /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$server$2f$route$2d$modules$2f$app$2d$page$2f$vendored$2f$ssr$2f$react$2d$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$ssr$5d$__$28$ecmascript$29$__["jsxDEV"])("button", {
                                                         onClick: ()=>onEditCard(card),
-                                                        className: "px-3 py-1 bg-blue-600 hover:bg-blue-700 text-white rounded transition-colors text-sm whitespace-nowrap",
+                                                        className: "px-3 py-1 bg-blue-600 hover:bg-blue-700 text-white rounded   transition-colors text-sm whitespace-nowrap",
                                                         children: "Edit"
                                                     }, void 0, false, {
                                                         fileName: "[project]/src/components/admin/CardsManagement.tsx",
@@ -1426,7 +1426,7 @@ const ResetDatabaseModal = ({ isOpen, password, error, isResetting, onPasswordCh
                                     type: "password",
                                     value: password,
                                     onChange: (e)=>onPasswordChange(e.target.value),
-                                    className: "w-full px-3 py-2 bg-gray-800 border border-gray-700 rounded-md focus:outline-none focus:ring-2 focus:ring-red-500 focus:border-red-500 text-white placeholder-gray-400",
+                                    className: "w-full px-3 py-2 bg-gray-800 border border-gray-700 rounded-md   focus:outline-none focus:ring-2 focus:ring-red-500 focus:border-red-500   text-white placeholder-gray-400",
                                     placeholder: "Enter admin password",
                                     disabled: isResetting
                                 }, void 0, false, {
@@ -1453,7 +1453,7 @@ const ResetDatabaseModal = ({ isOpen, password, error, isResetting, onPasswordCh
                             children: [
                                 /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$server$2f$route$2d$modules$2f$app$2d$page$2f$vendored$2f$ssr$2f$react$2d$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$ssr$5d$__$28$ecmascript$29$__["jsxDEV"])("button", {
                                     onClick: onCancel,
-                                    className: "flex-1 px-4 py-2 bg-gray-700 hover:bg-gray-600 text-white rounded-md  transition-colors",
+                                    className: "flex-1 px-4 py-2 bg-gray-700 hover:bg-gray-600 text-white rounded-md    transition-colors",
                                     disabled: isResetting,
                                     children: "Cancel"
                                 }, void 0, false, {
@@ -1463,7 +1463,7 @@ const ResetDatabaseModal = ({ isOpen, password, error, isResetting, onPasswordCh
                                 }, ("TURBOPACK compile-time value", void 0)),
                                 /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$server$2f$route$2d$modules$2f$app$2d$page$2f$vendored$2f$ssr$2f$react$2d$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$ssr$5d$__$28$ecmascript$29$__["jsxDEV"])("button", {
                                     onClick: onConfirm,
-                                    className: "flex-1 px-4 py-2 bg-red-600 hover:bg-red-700 text-white rounded-md  transition-colors font-semibold disabled:opacity-50 disabled:cursor-not-allowed",
+                                    className: "flex-1 px-4 py-2 bg-red-600 hover:bg-red-700 text-white rounded-md    transition-colors font-semibold disabled:opacity-50 disabled:cursor-not-allowed",
                                     disabled: isResetting || !password,
                                     children: isResetting ? "Resetting..." : "Reset Database"
                                 }, void 0, false, {
@@ -1680,7 +1680,8 @@ function CardForm({ isOpen, onClose, cardToEdit }) {
         image: "",
         mindFile: "",
         modelUrl: "",
-        value: 50
+        value: 50,
+        targetIndex: ""
     });
     const [isSubmitting, setIsSubmitting] = (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$server$2f$route$2d$modules$2f$app$2d$page$2f$vendored$2f$ssr$2f$react$2e$js__$5b$app$2d$ssr$5d$__$28$ecmascript$29$__["useState"])(false);
     const [error, setError] = (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$server$2f$route$2d$modules$2f$app$2d$page$2f$vendored$2f$ssr$2f$react$2e$js__$5b$app$2d$ssr$5d$__$28$ecmascript$29$__["useState"])("");
@@ -1694,7 +1695,8 @@ function CardForm({ isOpen, onClose, cardToEdit }) {
                 image: cardToEdit.image,
                 mindFile: cardToEdit.mindFile,
                 modelUrl: cardToEdit.modelUrl,
-                value: "value" in cardToEdit && typeof cardToEdit.value === "number" ? cardToEdit.value : 50
+                value: "value" in cardToEdit && typeof cardToEdit.value === "number" ? cardToEdit.value : 50,
+                targetIndex: cardToEdit.targetIndex !== undefined && cardToEdit.targetIndex !== null ? String(cardToEdit.targetIndex) : ""
             });
         } else {
             setFormData({
@@ -1710,7 +1712,8 @@ function CardForm({ isOpen, onClose, cardToEdit }) {
                 image: "",
                 mindFile: "",
                 modelUrl: "",
-                value: 50
+                value: 50,
+                targetIndex: ""
             });
         }
         setError("");
@@ -1764,13 +1767,15 @@ function CardForm({ isOpen, onClose, cardToEdit }) {
                 // Update existing card
                 await (0, __TURBOPACK__imported__module__$5b$project$5d2f$src$2f$services$2f$api$2e$ts__$5b$app$2d$ssr$5d$__$28$ecmascript$29$__["updateCard"])(cardToEdit.id, {
                     ...formData,
-                    options: formData.options.map((opt)=>opt.trim())
+                    options: formData.options.map((opt)=>opt.trim()),
+                    targetIndex: formData.targetIndex !== "" ? Number(formData.targetIndex) : null
                 });
             } else {
                 // Create new card (API automatically generates sequential ID and assigns tier)
                 await (0, __TURBOPACK__imported__module__$5b$project$5d2f$src$2f$services$2f$api$2e$ts__$5b$app$2d$ssr$5d$__$28$ecmascript$29$__["createCard"])({
                     ...formData,
-                    options: formData.options.map((opt)=>opt.trim())
+                    options: formData.options.map((opt)=>opt.trim()),
+                    targetIndex: formData.targetIndex !== "" ? Number(formData.targetIndex) : null
                 });
             }
             onClose();
@@ -1792,7 +1797,7 @@ function CardForm({ isOpen, onClose, cardToEdit }) {
                     children: cardToEdit ? "Edit Card" : "Add New Card"
                 }, void 0, false, {
                     fileName: "[project]/src/components/CardForm.tsx",
-                    lineNumber: 142,
+                    lineNumber: 153,
                     columnNumber: 9
                 }, this),
                 /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$server$2f$route$2d$modules$2f$app$2d$page$2f$vendored$2f$ssr$2f$react$2d$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$ssr$5d$__$28$ecmascript$29$__["jsxDEV"])("form", {
@@ -1806,7 +1811,7 @@ function CardForm({ isOpen, onClose, cardToEdit }) {
                                     children: "Name"
                                 }, void 0, false, {
                                     fileName: "[project]/src/components/CardForm.tsx",
-                                    lineNumber: 149,
+                                    lineNumber: 160,
                                     columnNumber: 13
                                 }, this),
                                 /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$server$2f$route$2d$modules$2f$app$2d$page$2f$vendored$2f$ssr$2f$react$2d$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$ssr$5d$__$28$ecmascript$29$__["jsxDEV"])("input", {
@@ -1816,18 +1821,18 @@ function CardForm({ isOpen, onClose, cardToEdit }) {
                                             ...formData,
                                             name: e.target.value
                                         }),
-                                    className: "w-full px-3 py-2 bg-gray-700 border border-gray-600 rounded-md text-white placeholder-gray-400 focus:outline-none focus:ring-2 focus:ring-blue-500 focus:border-transparent",
+                                    className: "w-full px-3 py-2 bg-gray-700 border border-gray-600 rounded-md   text-white placeholder-gray-400 focus:outline-none focus:ring-2   focus:ring-blue-500 focus:border-transparent",
                                     placeholder: "Enter card name",
                                     disabled: isSubmitting
                                 }, void 0, false, {
                                     fileName: "[project]/src/components/CardForm.tsx",
-                                    lineNumber: 152,
+                                    lineNumber: 163,
                                     columnNumber: 13
                                 }, this)
                             ]
                         }, void 0, true, {
                             fileName: "[project]/src/components/CardForm.tsx",
-                            lineNumber: 148,
+                            lineNumber: 159,
                             columnNumber: 11
                         }, this),
                         /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$server$2f$route$2d$modules$2f$app$2d$page$2f$vendored$2f$ssr$2f$react$2d$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$ssr$5d$__$28$ecmascript$29$__["jsxDEV"])("div", {
@@ -1837,7 +1842,7 @@ function CardForm({ isOpen, onClose, cardToEdit }) {
                                     children: "Card Value (Tier)"
                                 }, void 0, false, {
                                     fileName: "[project]/src/components/CardForm.tsx",
-                                    lineNumber: 168,
+                                    lineNumber: 179,
                                     columnNumber: 13
                                 }, this),
                                 /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$server$2f$route$2d$modules$2f$app$2d$page$2f$vendored$2f$ssr$2f$react$2d$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$ssr$5d$__$28$ecmascript$29$__["jsxDEV"])("select", {
@@ -1846,7 +1851,7 @@ function CardForm({ isOpen, onClose, cardToEdit }) {
                                             ...formData,
                                             value: Number(e.target.value)
                                         }),
-                                    className: "w-full px-3 py-2 bg-gray-700 border border-gray-600 rounded-md text-white focus:outline-none focus:ring-2 focus:ring-blue-500 focus:border-transparent",
+                                    className: "w-full px-3 py-2 bg-gray-700 border border-gray-600 rounded-md   text-white focus:outline-none focus:ring-2   focus:ring-blue-500 focus:border-transparent",
                                     disabled: isSubmitting || !!cardToEdit,
                                     children: [
                                         /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$server$2f$route$2d$modules$2f$app$2d$page$2f$vendored$2f$ssr$2f$react$2d$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$ssr$5d$__$28$ecmascript$29$__["jsxDEV"])("option", {
@@ -1854,7 +1859,7 @@ function CardForm({ isOpen, onClose, cardToEdit }) {
                                             children: "50 - Legendary (ID: c1xx)"
                                         }, void 0, false, {
                                             fileName: "[project]/src/components/CardForm.tsx",
-                                            lineNumber: 181,
+                                            lineNumber: 192,
                                             columnNumber: 15
                                         }, this),
                                         /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$server$2f$route$2d$modules$2f$app$2d$page$2f$vendored$2f$ssr$2f$react$2d$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$ssr$5d$__$28$ecmascript$29$__["jsxDEV"])("option", {
@@ -1862,7 +1867,7 @@ function CardForm({ isOpen, onClose, cardToEdit }) {
                                             children: "20 - Rare (ID: c2xx)"
                                         }, void 0, false, {
                                             fileName: "[project]/src/components/CardForm.tsx",
-                                            lineNumber: 182,
+                                            lineNumber: 193,
                                             columnNumber: 15
                                         }, this),
                                         /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$server$2f$route$2d$modules$2f$app$2d$page$2f$vendored$2f$ssr$2f$react$2d$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$ssr$5d$__$28$ecmascript$29$__["jsxDEV"])("option", {
@@ -1870,13 +1875,13 @@ function CardForm({ isOpen, onClose, cardToEdit }) {
                                             children: "8 - Common (ID: c3xx)"
                                         }, void 0, false, {
                                             fileName: "[project]/src/components/CardForm.tsx",
-                                            lineNumber: 183,
+                                            lineNumber: 194,
                                             columnNumber: 15
                                         }, this)
                                     ]
                                 }, void 0, true, {
                                     fileName: "[project]/src/components/CardForm.tsx",
-                                    lineNumber: 171,
+                                    lineNumber: 182,
                                     columnNumber: 13
                                 }, this),
                                 cardToEdit && /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$server$2f$route$2d$modules$2f$app$2d$page$2f$vendored$2f$ssr$2f$react$2d$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$ssr$5d$__$28$ecmascript$29$__["jsxDEV"])("p", {
@@ -1884,13 +1889,13 @@ function CardForm({ isOpen, onClose, cardToEdit }) {
                                     children: "Card tier cannot be changed after creation"
                                 }, void 0, false, {
                                     fileName: "[project]/src/components/CardForm.tsx",
-                                    lineNumber: 186,
+                                    lineNumber: 197,
                                     columnNumber: 15
                                 }, this)
                             ]
                         }, void 0, true, {
                             fileName: "[project]/src/components/CardForm.tsx",
-                            lineNumber: 167,
+                            lineNumber: 178,
                             columnNumber: 11
                         }, this),
                         /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$server$2f$route$2d$modules$2f$app$2d$page$2f$vendored$2f$ssr$2f$react$2d$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$ssr$5d$__$28$ecmascript$29$__["jsxDEV"])("div", {
@@ -1900,7 +1905,7 @@ function CardForm({ isOpen, onClose, cardToEdit }) {
                                     children: "Question"
                                 }, void 0, false, {
                                     fileName: "[project]/src/components/CardForm.tsx",
-                                    lineNumber: 194,
+                                    lineNumber: 205,
                                     columnNumber: 13
                                 }, this),
                                 /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$server$2f$route$2d$modules$2f$app$2d$page$2f$vendored$2f$ssr$2f$react$2d$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$ssr$5d$__$28$ecmascript$29$__["jsxDEV"])("textarea", {
@@ -1909,19 +1914,19 @@ function CardForm({ isOpen, onClose, cardToEdit }) {
                                             ...formData,
                                             question: e.target.value
                                         }),
-                                    className: "w-full px-3 py-2 bg-gray-700 border border-gray-600 rounded-md text-white placeholder-gray-400 focus:outline-none focus:ring-2 focus:ring-blue-500 focus:border-transparent",
+                                    className: "w-full px-3 py-2 bg-gray-700 border border-gray-600 rounded-md   text-white placeholder-gray-400 focus:outline-none focus:ring-2   focus:ring-blue-500 focus:border-transparent",
                                     placeholder: "Enter question",
                                     rows: 3,
                                     disabled: isSubmitting
                                 }, void 0, false, {
                                     fileName: "[project]/src/components/CardForm.tsx",
-                                    lineNumber: 197,
+                                    lineNumber: 208,
                                     columnNumber: 13
                                 }, this)
                             ]
                         }, void 0, true, {
                             fileName: "[project]/src/components/CardForm.tsx",
-                            lineNumber: 193,
+                            lineNumber: 204,
                             columnNumber: 11
                         }, this),
                         /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$server$2f$route$2d$modules$2f$app$2d$page$2f$vendored$2f$ssr$2f$react$2d$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$ssr$5d$__$28$ecmascript$29$__["jsxDEV"])("div", {
@@ -1932,7 +1937,7 @@ function CardForm({ isOpen, onClose, cardToEdit }) {
                                     children: "Options"
                                 }, void 0, false, {
                                     fileName: "[project]/src/components/CardForm.tsx",
-                                    lineNumber: 213,
+                                    lineNumber: 224,
                                     columnNumber: 13
                                 }, this),
                                 formData.options.map((option, index)=>/*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$server$2f$route$2d$modules$2f$app$2d$page$2f$vendored$2f$ssr$2f$react$2d$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$ssr$5d$__$28$ecmascript$29$__["jsxDEV"])("div", {
@@ -1951,12 +1956,12 @@ function CardForm({ isOpen, onClose, cardToEdit }) {
                                                         options: newOptions
                                                     });
                                                 },
-                                                className: "flex-1 px-3 py-2 bg-gray-700 border border-gray-600 rounded-md text-white placeholder-gray-400 focus:outline-none focus:ring-2 focus:ring-blue-500 focus:border-transparent",
+                                                className: "flex-1 px-3 py-2 bg-gray-700 border border-gray-600 rounded-md   text-white placeholder-gray-400 focus:outline-none focus:ring-2   focus:ring-blue-500 focus:border-transparent",
                                                 placeholder: `Option ${index + 1}`,
                                                 disabled: isSubmitting
                                             }, void 0, false, {
                                                 fileName: "[project]/src/components/CardForm.tsx",
-                                                lineNumber: 218,
+                                                lineNumber: 229,
                                                 columnNumber: 17
                                             }, this),
                                             /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$server$2f$route$2d$modules$2f$app$2d$page$2f$vendored$2f$ssr$2f$react$2d$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$ssr$5d$__$28$ecmascript$29$__["jsxDEV"])("div", {
@@ -1974,7 +1979,7 @@ function CardForm({ isOpen, onClose, cardToEdit }) {
                                                         disabled: isSubmitting
                                                     }, void 0, false, {
                                                         fileName: "[project]/src/components/CardForm.tsx",
-                                                        lineNumber: 233,
+                                                        lineNumber: 244,
                                                         columnNumber: 19
                                                     }, this),
                                                     /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$server$2f$route$2d$modules$2f$app$2d$page$2f$vendored$2f$ssr$2f$react$2d$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$ssr$5d$__$28$ecmascript$29$__["jsxDEV"])("span", {
@@ -1982,25 +1987,25 @@ function CardForm({ isOpen, onClose, cardToEdit }) {
                                                         children: "Correct"
                                                     }, void 0, false, {
                                                         fileName: "[project]/src/components/CardForm.tsx",
-                                                        lineNumber: 243,
+                                                        lineNumber: 254,
                                                         columnNumber: 19
                                                     }, this)
                                                 ]
                                             }, void 0, true, {
                                                 fileName: "[project]/src/components/CardForm.tsx",
-                                                lineNumber: 232,
+                                                lineNumber: 243,
                                                 columnNumber: 17
                                             }, this)
                                         ]
                                     }, index, true, {
                                         fileName: "[project]/src/components/CardForm.tsx",
-                                        lineNumber: 217,
+                                        lineNumber: 228,
                                         columnNumber: 15
                                     }, this))
                             ]
                         }, void 0, true, {
                             fileName: "[project]/src/components/CardForm.tsx",
-                            lineNumber: 212,
+                            lineNumber: 223,
                             columnNumber: 11
                         }, this),
                         /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$server$2f$route$2d$modules$2f$app$2d$page$2f$vendored$2f$ssr$2f$react$2d$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$ssr$5d$__$28$ecmascript$29$__["jsxDEV"])("div", {
@@ -2013,7 +2018,7 @@ function CardForm({ isOpen, onClose, cardToEdit }) {
                                             children: "Image URL"
                                         }, void 0, false, {
                                             fileName: "[project]/src/components/CardForm.tsx",
-                                            lineNumber: 252,
+                                            lineNumber: 263,
                                             columnNumber: 15
                                         }, this),
                                         /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$server$2f$route$2d$modules$2f$app$2d$page$2f$vendored$2f$ssr$2f$react$2d$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$ssr$5d$__$28$ecmascript$29$__["jsxDEV"])("input", {
@@ -2023,18 +2028,18 @@ function CardForm({ isOpen, onClose, cardToEdit }) {
                                                     ...formData,
                                                     image: e.target.value
                                                 }),
-                                            className: "w-full px-3 py-2 bg-gray-700 border border-gray-600 rounded-md text-white placeholder-gray-400 focus:outline-none focus:ring-2 focus:ring-blue-500 focus:border-transparent",
+                                            className: "w-full px-3 py-2 bg-gray-700 border border-gray-600 rounded-md   text-white placeholder-gray-400 focus:outline-none focus:ring-2   focus:ring-blue-500 focus:border-transparent",
                                             placeholder: "Enter image URL",
                                             disabled: isSubmitting
                                         }, void 0, false, {
                                             fileName: "[project]/src/components/CardForm.tsx",
-                                            lineNumber: 255,
+                                            lineNumber: 266,
                                             columnNumber: 15
                                         }, this)
                                     ]
                                 }, void 0, true, {
                                     fileName: "[project]/src/components/CardForm.tsx",
-                                    lineNumber: 251,
+                                    lineNumber: 262,
                                     columnNumber: 13
                                 }, this),
                                 /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$server$2f$route$2d$modules$2f$app$2d$page$2f$vendored$2f$ssr$2f$react$2d$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$ssr$5d$__$28$ecmascript$29$__["jsxDEV"])("div", {
@@ -2044,24 +2049,24 @@ function CardForm({ isOpen, onClose, cardToEdit }) {
                                             children: "Mind File URL (Auto-set by tier)"
                                         }, void 0, false, {
                                             fileName: "[project]/src/components/CardForm.tsx",
-                                            lineNumber: 269,
+                                            lineNumber: 280,
                                             columnNumber: 15
                                         }, this),
                                         /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$server$2f$route$2d$modules$2f$app$2d$page$2f$vendored$2f$ssr$2f$react$2d$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$ssr$5d$__$28$ecmascript$29$__["jsxDEV"])("input", {
                                             type: "text",
                                             value: formData.mindFile,
-                                            className: "w-full px-3 py-2 bg-gray-600 border border-gray-600 rounded-md text-gray-400 cursor-not-allowed",
+                                            className: "w-full px-3 py-2 bg-gray-600 border border-gray-600 rounded-md   text-gray-400 cursor-not-allowed",
                                             disabled: true,
                                             readOnly: true
                                         }, void 0, false, {
                                             fileName: "[project]/src/components/CardForm.tsx",
-                                            lineNumber: 272,
+                                            lineNumber: 283,
                                             columnNumber: 15
                                         }, this)
                                     ]
                                 }, void 0, true, {
                                     fileName: "[project]/src/components/CardForm.tsx",
-                                    lineNumber: 268,
+                                    lineNumber: 279,
                                     columnNumber: 13
                                 }, this),
                                 /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$server$2f$route$2d$modules$2f$app$2d$page$2f$vendored$2f$ssr$2f$react$2d$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$ssr$5d$__$28$ecmascript$29$__["jsxDEV"])("div", {
@@ -2071,7 +2076,7 @@ function CardForm({ isOpen, onClose, cardToEdit }) {
                                             children: "Model URL"
                                         }, void 0, false, {
                                             fileName: "[project]/src/components/CardForm.tsx",
-                                            lineNumber: 282,
+                                            lineNumber: 293,
                                             columnNumber: 15
                                         }, this),
                                         /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$server$2f$route$2d$modules$2f$app$2d$page$2f$vendored$2f$ssr$2f$react$2d$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$ssr$5d$__$28$ecmascript$29$__["jsxDEV"])("input", {
@@ -2081,24 +2086,64 @@ function CardForm({ isOpen, onClose, cardToEdit }) {
                                                     ...formData,
                                                     modelUrl: e.target.value
                                                 }),
-                                            className: "w-full px-3 py-2 bg-gray-700 border border-gray-600 rounded-md text-white placeholder-gray-400 focus:outline-none focus:ring-2 focus:ring-blue-500 focus:border-transparent",
+                                            className: "w-full px-3 py-2 bg-gray-700 border border-gray-600 rounded-md   text-white placeholder-gray-400 focus:outline-none focus:ring-2   focus:ring-blue-500 focus:border-transparent",
                                             placeholder: "Enter model URL",
                                             disabled: isSubmitting
                                         }, void 0, false, {
                                             fileName: "[project]/src/components/CardForm.tsx",
-                                            lineNumber: 285,
+                                            lineNumber: 296,
                                             columnNumber: 15
                                         }, this)
                                     ]
                                 }, void 0, true, {
                                     fileName: "[project]/src/components/CardForm.tsx",
-                                    lineNumber: 281,
+                                    lineNumber: 292,
+                                    columnNumber: 13
+                                }, this),
+                                /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$server$2f$route$2d$modules$2f$app$2d$page$2f$vendored$2f$ssr$2f$react$2d$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$ssr$5d$__$28$ecmascript$29$__["jsxDEV"])("div", {
+                                    children: [
+                                        /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$server$2f$route$2d$modules$2f$app$2d$page$2f$vendored$2f$ssr$2f$react$2d$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$ssr$5d$__$28$ecmascript$29$__["jsxDEV"])("label", {
+                                            className: "block text-sm font-medium text-gray-300 mb-1",
+                                            children: "AR Target Index (0-based in .mind file)"
+                                        }, void 0, false, {
+                                            fileName: "[project]/src/components/CardForm.tsx",
+                                            lineNumber: 310,
+                                            columnNumber: 15
+                                        }, this),
+                                        /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$server$2f$route$2d$modules$2f$app$2d$page$2f$vendored$2f$ssr$2f$react$2d$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$ssr$5d$__$28$ecmascript$29$__["jsxDEV"])("input", {
+                                            type: "number",
+                                            min: "0",
+                                            value: formData.targetIndex,
+                                            onChange: (e)=>setFormData({
+                                                    ...formData,
+                                                    targetIndex: e.target.value
+                                                }),
+                                            className: "w-full px-3 py-2 bg-gray-700 border border-gray-600 rounded-md   text-white placeholder-gray-400 focus:outline-none focus:ring-2   focus:ring-blue-500 focus:border-transparent",
+                                            placeholder: "e.g. 0, 1, 2 (matches image order in .mind file)",
+                                            disabled: isSubmitting
+                                        }, void 0, false, {
+                                            fileName: "[project]/src/components/CardForm.tsx",
+                                            lineNumber: 313,
+                                            columnNumber: 15
+                                        }, this),
+                                        /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$server$2f$route$2d$modules$2f$app$2d$page$2f$vendored$2f$ssr$2f$react$2d$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$ssr$5d$__$28$ecmascript$29$__["jsxDEV"])("span", {
+                                            className: "text-xs text-gray-400 mt-1 block",
+                                            children: "The numeric index of this card in the compiled .mind file (Target 0, Target 1, Target 2...)"
+                                        }, void 0, false, {
+                                            fileName: "[project]/src/components/CardForm.tsx",
+                                            lineNumber: 326,
+                                            columnNumber: 15
+                                        }, this)
+                                    ]
+                                }, void 0, true, {
+                                    fileName: "[project]/src/components/CardForm.tsx",
+                                    lineNumber: 309,
                                     columnNumber: 13
                                 }, this)
                             ]
                         }, void 0, true, {
                             fileName: "[project]/src/components/CardForm.tsx",
-                            lineNumber: 250,
+                            lineNumber: 261,
                             columnNumber: 11
                         }, this),
                         error && /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$server$2f$route$2d$modules$2f$app$2d$page$2f$vendored$2f$ssr$2f$react$2d$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$ssr$5d$__$28$ecmascript$29$__["jsxDEV"])("p", {
@@ -2106,7 +2151,7 @@ function CardForm({ isOpen, onClose, cardToEdit }) {
                             children: error
                         }, void 0, false, {
                             fileName: "[project]/src/components/CardForm.tsx",
-                            lineNumber: 300,
+                            lineNumber: 332,
                             columnNumber: 21
                         }, this),
                         /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$server$2f$route$2d$modules$2f$app$2d$page$2f$vendored$2f$ssr$2f$react$2d$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$ssr$5d$__$28$ecmascript$29$__["jsxDEV"])("div", {
@@ -2120,40 +2165,40 @@ function CardForm({ isOpen, onClose, cardToEdit }) {
                                     children: "Cancel"
                                 }, void 0, false, {
                                     fileName: "[project]/src/components/CardForm.tsx",
-                                    lineNumber: 303,
+                                    lineNumber: 335,
                                     columnNumber: 13
                                 }, this),
                                 /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$server$2f$route$2d$modules$2f$app$2d$page$2f$vendored$2f$ssr$2f$react$2d$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$ssr$5d$__$28$ecmascript$29$__["jsxDEV"])("button", {
                                     type: "submit",
-                                    className: "px-4 py-2 bg-blue-600 text-white rounded-md hover:bg-blue-700 transition-colors focus:outline-none focus:ring-2 focus:ring-blue-500 focus:ring-offset-2 focus:ring-offset-gray-800 disabled:opacity-50",
+                                    className: "px-4 py-2 bg-blue-600 text-white rounded-md hover:bg-blue-700   transition-colors focus:outline-none focus:ring-2 focus:ring-blue-500   focus:ring-offset-2 focus:ring-offset-gray-800 disabled:opacity-50",
                                     disabled: isSubmitting,
                                     children: isSubmitting ? "Saving..." : cardToEdit ? "Update Card" : "Add Card"
                                 }, void 0, false, {
                                     fileName: "[project]/src/components/CardForm.tsx",
-                                    lineNumber: 311,
+                                    lineNumber: 343,
                                     columnNumber: 13
                                 }, this)
                             ]
                         }, void 0, true, {
                             fileName: "[project]/src/components/CardForm.tsx",
-                            lineNumber: 302,
+                            lineNumber: 334,
                             columnNumber: 11
                         }, this)
                     ]
                 }, void 0, true, {
                     fileName: "[project]/src/components/CardForm.tsx",
-                    lineNumber: 146,
+                    lineNumber: 157,
                     columnNumber: 9
                 }, this)
             ]
         }, void 0, true, {
             fileName: "[project]/src/components/CardForm.tsx",
-            lineNumber: 141,
+            lineNumber: 152,
             columnNumber: 7
         }, this)
     }, void 0, false, {
         fileName: "[project]/src/components/CardForm.tsx",
-        lineNumber: 140,
+        lineNumber: 151,
         columnNumber: 5
     }, this);
 }

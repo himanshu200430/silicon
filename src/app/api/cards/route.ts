@@ -97,6 +97,7 @@ export async function POST(request: Request) {
         question: question.trim(),
         options: options.map((opt: string) => opt.trim()),
         correctAnswer: Number(correctAnswer) || 0,
+        targetIndex: body.targetIndex !== undefined && body.targetIndex !== null && body.targetIndex !== '' ? Number(body.targetIndex) : null,
         mindFile: mindFile || '',
         modelUrl: modelUrl || '',
         isCaught: false,
